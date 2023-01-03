@@ -1,14 +1,16 @@
-var colors = ['red', 'green', 'blue', 'black'];
-
+var colors = ["red", "green", "blue", "black"];
 var currentColorIndex = 0;
+let body = document.querySelector("body");
+let store = localStorage.getItem("value");
 
 function changeBackground() {
-    var body = document.getElementsByTagName('body')[0];
+  let currentColor = colors[currentColorIndex];
 
-    var currentColor = colors[currentColorIndex];
+  body.style.backgroundColor = currentColor;
 
-    body.style.backgroundColor = currentColor;
-
-
-    currentColorIndex = (currentColorIndex + 1) % colors.length;
+  currentColorIndex = (currentColorIndex + 1) % colors.length;
+  localStorage.setItem("value", (body.style.backgroundColor = currentColor));
+}
+if (localStorage.value) {
+  body.style.background = store;
 }
