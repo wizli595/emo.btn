@@ -76,6 +76,10 @@ button:focus::after {
     animation: none;
     display: none;
 }
+h1 {
+  text-align: center;
+  text-transform: capitalize;
+}
 
 @keyframes ring {
     0% {
