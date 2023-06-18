@@ -1,45 +1,44 @@
 var colors = ["white", "red", "green", "blue", "yellow", "orange", "black"];
+var emotion = [
+  "clean",
+  "angry",
+  "Freshness",
+  "peace",
+  "warmth",
+  "confidence",
+  "devastated",
+];
 var currentColorIndex = 0;
-let body = document.querySelector("body");
-let store = localStorage.getItem("value");
+let body = document.body;
+let store = JSON.parse(localStorage.getItem("value"));
 let emo = document.querySelector("h1");
+let hd = document.querySelector("title");
+
 function changeBackground() {
+  if (body.style.backgroundColor == "orange") {
+    body.style.color = "white";
+  } else {
+    body.style.color = "black";
+  }
+  emo.removeAttribute("class");
+  emo.innerHTML = "";
   let currentColor = colors[currentColorIndex];
+  let currentEmo = colors[currentColorIndex];
 
   body.style.backgroundColor = currentColor;
+  emo.innerHTML = emotion[currentColorIndex];
+  hd.innerHTML = emotion[currentColorIndex];
 
+  let arr = {
+    color: currentColor,
+    feel: emotion[currentColorIndex],
+  };
   currentColorIndex = (currentColorIndex + 1) % colors.length;
-  localStorage.setItem("value", (body.style.backgroundColor = currentColor));
-   if (body.style.background == "red") {
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "angry";
-  } else if (body.style.background == "white") {
-    emo.style.color = "black";
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "clean";
-  } else if (body.style.background == "green") {
-    emo.style.color = "white";
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "Freshness";
-  } else if (body.style.background == "blue") {
-    emo.style.color = "white";
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "peace";
-  } else if (body.style.background == "yellow") {
-    emo.style.color = "white";
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "warmth";
-  } else if (body.style.background == "black") {
-    emo.style.color = "white";
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "devastated";
-  } else if (body.style.background == "orange") {
-    emo.style.color = "white";
-    emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
-    emo.innerHTML = "confidence";
-  }
-  
+  localStorage.setItem("value", JSON.stringify(arr));
+  emo.setAttribute("class", "animate__animated animate__fadeInUpBig");
 }
 if (localStorage.value) {
-  body.style.background = store;
+  body.style.background = store.color;
+  emo.innerHTML = store.feel;
+  hd.innerHTML = store.feel;
 }
